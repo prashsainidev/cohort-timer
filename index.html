@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ChaiCode Cohort Timer | Prashant Saini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<div id="cursor-glow"></div>
+
+<div class="card">
+  <div class="wave-section">
+    <div class="wave-fill"></div>
+    <svg class="wave-svg w1" viewBox="0 0 1440 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,18 C180,34 360,2 540,18 C720,34 900,2 1080,18 C1260,34 1440,2 1440,18 L1440,36 L0,36 Z" fill="#f97316"/>
+    </svg>
+    <svg class="wave-svg w2" viewBox="0 0 1440 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,12 C200,32 400,2 600,16 C800,32 1000,2 1200,16 C1360,28 1440,8 1440,12 L1440,36 L0,36 Z" fill="#fb923c"/>
+    </svg>
+    <canvas id="sparks"></canvas>
+    <div class="wave-label">
+      <span class="wave-pct" id="wavePct">0%</span>
+      <span class="wave-sub">cohort progress</span>
+    </div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-fill" id="progFill" style="width: 0%"></div>
+    <div class="milestones">
+      <div class="ms-dot" id="ms30" data-label="D30" style="left:16.6%"></div>
+      <div class="ms-dot" id="ms60" data-label="D60" style="left:33.3%"></div>
+      <div class="ms-dot" id="ms90" data-label="D90" style="left:50%"></div>
+      <div class="ms-dot" id="ms120" data-label="D120" style="left:66.6%"></div>
+      <div class="ms-dot" id="ms150" data-label="D150" style="left:83.3%"></div>
+    </div>
+  </div>
+
+  <div class="pct-row">
+    <span class="pct-label">Cohort Progress</span>
+    <span class="pct-val" id="pctVal">0%</span>
+  </div>
+
+  <div class="body">
+    <div class="top-row">
+      <div class="badge"><span class="live-dot"></span>Journey in progress</div>
+      <span class="date-tag">Jan 17, 2026 -></span>
+    </div>
+
+    <p class="title">ChaiCode <em>WebDev</em> Cohort 2.0</p>
+    <p class="subtitle">Time spent learning - still going</p>
+
+    <div class="units">
+      <div class="unit">
+        <span class="num" id="days">0</span>
+        <span class="lbl">Days</span>
+      </div>
+      <div class="unit">
+        <span class="num" id="hours">00</span>
+        <span class="lbl">Hours</span>
+      </div>
+      <div class="unit">
+        <span class="num" id="mins">00</span>
+        <span class="lbl">Mins</span>
+      </div>
+      <div class="unit">
+        <span class="num" id="secs">00</span>
+        <span class="lbl">Secs</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2h12v1H2zm0 3h12v1H2zm0 3h8v1H2zm0 3h5v1H2z"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="articlesCount">3</span>
+          <span class="stat-label">Articles Published</span>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm.75 7.44V4.5h-1.5v4.56l3.22 1.86.75-1.3-2.47-1.42z"/>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <span class="stat-num" id="daysLeft">--</span>
+          <span class="stat-label">Days Remaining</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-wrap">
+      <p class="quote-text" id="quoteText">"The best time to start was yesterday. The next best time is now."</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="footer">
+      <a href="https://prashsainidev.hashnode.dev" target="_blank">prashsainidev.hashnode.dev</a>
+      <span class="footer-r">ChaiCode | 6mo cohort</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
