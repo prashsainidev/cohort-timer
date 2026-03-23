@@ -1,5 +1,7 @@
 const START = new Date('2026-01-17T00:00:00');
 const COHORT_DAYS = 180;
+const HASHNODE_HOST = 'prashsainidev.hashnode.dev';
+const HASHNODE_ENDPOINT = 'https://gql.hashnode.com';
 
 const QUOTES = [
   '"The best time to start was yesterday. The next best time is now."',
@@ -20,6 +22,7 @@ const wavePctEl = document.getElementById('wavePct');
 const pctValEl = document.getElementById('pctVal');
 const progFillEl = document.getElementById('progFill');
 const daysLeftEl = document.getElementById('daysLeft');
+const articlesCountEl = document.getElementById('articlesCount');
 const quoteEl = document.getElementById('quoteText');
 const glow = document.getElementById('cursor-glow');
 
@@ -41,6 +44,57 @@ let fillDone = false;
 
 function pad(n) {
   return String(n).padStart(2, '0');
+}
+
+async function fetchArticlesCount() {
+  const fallbackCount = articlesCountEl.textContent.trim();
+  articlesCountEl.textContent = '...';
+  const query = `
+    query PublicationPostsCount($host: String!) {
+      publication(host: $host) {
+        id
+        posts(first: 1) {
+          totalDocuments
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(HASHNODE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query,
+        variables: {
+          host: HASHNODE_HOST
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Hashnode request failed with status ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.errors?.length) {
+      throw new Error(result.errors[0].message || 'Hashnode GraphQL error');
+    }
+
+    const totalDocuments = result?.data?.publication?.posts?.totalDocuments;
+    if (typeof totalDocuments === 'number' && Number.isFinite(totalDocuments)) {
+      articlesCountEl.textContent = String(totalDocuments);
+      return;
+    }
+
+    throw new Error('Hashnode article count missing in response');
+  } catch (error) {
+    console.error('Unable to fetch Hashnode article count:', error);
+    articlesCountEl.textContent = fallbackCount;
+  }
 }
 
 document.addEventListener('mousemove', (event) => {
@@ -164,6 +218,7 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 drawSparks();
+fetchArticlesCount();
 setInterval(rotateQuote, 5000);
 tick();
 setInterval(tick, 250);
