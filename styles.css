@@ -57,9 +57,9 @@ body::before {
 .card {
   position: relative;
   z-index: 1;
-  width: 490px;
+  width: min(100%, 490px);
   max-width: 100%;
-  min-width: min(490px, 100%);
+  min-width: 0;
   flex-shrink: 0;
   background: var(--card);
   border: 1px solid var(--border-hi);
@@ -486,6 +486,95 @@ body::before {
   font-family: var(--mono);
   font-size: 10px;
   color: var(--text-3);
+}
+
+@media (max-width: 640px) {
+  html {
+    display: block;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100svh;
+    display: block;
+    padding: 0.75rem;
+  }
+
+  #cursor-glow {
+    display: none;
+  }
+
+  .card {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .wave-section {
+    height: 104px;
+  }
+
+  .pct-row,
+  .body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .top-row,
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .badge,
+  .date-tag,
+  .footer-r,
+  .footer a {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    line-height: 1.5;
+  }
+
+  .units {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .unit {
+    min-width: 0;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat,
+  .stat-info {
+    min-width: 0;
+  }
+
+  .stat-label {
+    line-height: 1.45;
+  }
+
+  .quote-wrap {
+    height: auto;
+    min-height: 60px;
+  }
+
+  .quote-text {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
 }
 
 @keyframes fadeUp {
